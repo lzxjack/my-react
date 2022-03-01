@@ -3,6 +3,8 @@ const WebpackBar = require('webpackbar');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
+// const CopyPlugin = require('copy-webpack-plugin');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 const { ROOT_PATH } = require('../constant');
 const { isDevelopment, isProduction } = require('../env');
@@ -66,6 +68,22 @@ module.exports = {
         configFile: path.resolve(ROOT_PATH, './tsconfig.json'),
       },
     }),
+    // new CopyPlugin({
+    //   patterns: [
+    //     {
+    //       context: 'public',
+    //       from: '*',
+    //       to: path.resolve(ROOT_PATH, './build/public'),
+    //       toType: 'dir',
+    //       globOptions: {
+    //         dot: true,
+    //         gitignore: true,
+    //         ignore: ['**/index.html'], // **表示任意目录下
+    //       },
+    //     },
+    //   ],
+    // }),
+    new CleanWebpackPlugin(),
   ],
 
   module: {
@@ -104,6 +122,21 @@ module.exports = {
         options: { cacheDirectory: true }, // 缓存公共文件
         exclude: /node_modules/,
       },
+      {
+        test: [/\.bmp$/, /\.gif$/, /\.jpe?g$/, /\.png$/],
+        // 自动选择导出为单独文件还是url形式
+        type: 'asset',
+        parser: {
+          dataUrlCondition: {
+            maxSize: 4 * 1024,
+          },
+        },
+      },
+      {
+        test: /\.(eot|svg|ttf|woff|woff2?)$/,
+        // 分割为单独文件，并导出url
+        type: 'asset/resource',
+      },
     ],
   },
 
@@ -116,5 +149,15 @@ module.exports = {
     },
     // 若没有写后缀时，依次从数组中查找相应后缀文件是否存在
     extensions: ['.tsx', '.ts', '.js', '.json'],
+  },
+
+  // 缓存
+  cache: {
+    // 基于文件系统的持久化缓存
+    type: 'filesystem',
+    buildDependencies: {
+      // 当配置文件发生变化时，缓存失效
+      config: [__filename],
+    },
   },
 };

@@ -14,6 +14,8 @@ module.exports = merge(common, {
   output: {
     path: path.resolve(ROOT_PATH, './build'),
     filename: 'js/[name].[contenthash:8].js',
+    // 资源
+    assetModuleFilename: 'images/[name].[contenthash:8].[ext]',
   },
   plugins: [
     // 生产模式使用了MiniCssExtractPlugin.loader，则需要使用MiniCssExtractPlugin
@@ -28,6 +30,7 @@ module.exports = merge(common, {
     minimize: true,
     minimizer: [
       new CssMinimizerPlugin(),
+      // JS压缩
       new TerserPlugin({
         extractComments: false, // 去除所有注释
         terserOptions: {
@@ -35,6 +38,11 @@ module.exports = merge(common, {
         },
       }),
     ],
+    // 代码分割
+    splitChunks: {
+      chunks: 'all',
+      minSize: 0,
+    },
   },
 });
 
