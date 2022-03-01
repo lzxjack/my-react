@@ -1,6 +1,6 @@
 const path = require('path');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
 const WebpackBar = require('webpackbar');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 const { ROOT_PATH } = require('../constant');
@@ -8,11 +8,13 @@ const { isDevelopment, isProduction } = require('../env');
 
 const getCssLoaders = () => {
   const cssLoaders = [
+    // 开发模式使用style-loader，生产模式MiniCssExtractPlugin.loader
     isDevelopment ? 'style-loader' : MiniCssExtractPlugin.loader,
     {
       loader: 'css-loader',
       options: {
         modules: {
+          // 模块化类名，防止重复
           localIdentName: '[local]--[hash:base64:5]',
         },
         sourceMap: isDevelopment,
@@ -20,6 +22,7 @@ const getCssLoaders = () => {
     },
   ];
 
+  // 加css前缀的loader配置
   const postcssLoader = {
     loader: 'postcss-loader',
     options: {
@@ -38,6 +41,7 @@ const getCssLoaders = () => {
     },
   };
 
+  // 生产模式时，才需要加css前缀
   isProduction && cssLoaders.push(postcssLoader);
 
   return cssLoaders;

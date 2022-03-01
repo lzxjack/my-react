@@ -15,6 +15,7 @@ module.exports = merge(common, {
     filename: 'js/[name].[contenthash:8].js',
   },
   plugins: [
+    // 生产模式使用了MiniCssExtractPlugin.loader，则需要使用MiniCssExtractPlugin
     new MiniCssExtractPlugin({
       filename: 'css/[name].[contenthash:8].css',
       chunkFilename: 'css/[name].[contenthash:8].chunk.css',
