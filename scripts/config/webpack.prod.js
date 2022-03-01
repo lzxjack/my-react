@@ -8,7 +8,7 @@ module.exports = merge(common, {
   mode: 'production',
   devtool: false,
   output: {
-    path: path.resolve(ROOT_PATH, './dist'),
+    path: path.resolve(ROOT_PATH, './build'),
     filename: 'js/[name].[contenthash:8].js',
   },
 });

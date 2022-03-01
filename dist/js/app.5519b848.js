@@ -1,1 +1,0 @@
-(()=>{var e={138:(e,r,t)=>{(e=t.nmd(e))&&e.hot,document.getElementById("root").innerHTML="1122222"}},r={};function t(d){var n=r[d];if(void 0!==n)return n.exports;var o=r[d]={id:d,loaded:!1,exports:{}};return e[d](o,o.exports,t),o.loaded=!0,o.exports}t.nmd=e=>(e.paths=[],e.children||(e.children=[]),e),t(138)})();
