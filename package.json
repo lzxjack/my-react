@@ -4,13 +4,17 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "dev": "webpack serve --mode development",
-    "build": "webpack --mode production"
+    "start": "cross-env NODE_ENV=development webpack-dev-server --config ./scripts/config/webpack.dev.js",
+    "build": "cross-env NODE_ENV=production webpack --config ./scripts/config/webpack.prod.js"
   },
   "dependencies": {
+    "@types/webpack-env": "^1.16.3",
+    "cross-env": "^7.0.3",
     "html-webpack-plugin": "^5.5.0",
     "webpack": "^5.69.1",
     "webpack-cli": "^4.9.2",
-    "webpack-dev-server": "^4.7.4"
+    "webpack-dev-server": "^4.7.4",
+    "webpack-merge": "^5.8.0",
+    "webpackbar": "^5.0.2"
   }
 }
