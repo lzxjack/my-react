@@ -11,3 +11,5 @@ const newEle = document.createElement('div');
 newEle.className = style.ele;
 newEle.innerHTML = '测试css module';
 ele.appendChild(newEle);
+
+console.log(11111);
