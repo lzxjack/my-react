@@ -2,6 +2,7 @@ const path = require('path');
 const WebpackBar = require('webpackbar');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 
 const { ROOT_PATH } = require('../constant');
 const { isDevelopment, isProduction } = require('../env');
@@ -49,7 +50,7 @@ const getCssLoaders = () => {
 
 module.exports = {
   entry: {
-    index: path.resolve(ROOT_PATH, './src/index.js'),
+    index: path.resolve(ROOT_PATH, './src/index'),
   },
 
   plugins: [
@@ -59,6 +60,12 @@ module.exports = {
       inject: 'body',
     }),
     new WebpackBar(),
+    // webpack打包不会有类型检查，强制ts类型检查
+    new ForkTsCheckerWebpackPlugin({
+      typescript: {
+        configFile: path.resolve(ROOT_PATH, './tsconfig.json'),
+      },
+    }),
   ],
 
   module: {
@@ -91,6 +98,23 @@ module.exports = {
           },
         ],
       },
+      {
+        test: /\.(tsx?|js)$/, // ts\tsx\js
+        loader: 'babel-loader',
+        options: { cacheDirectory: true }, // 缓存公共文件
+        exclude: /node_modules/,
+      },
     ],
+  },
+
+  // 路径配置别名
+  resolve: {
+    alias: {
+      '@src': path.resolve(ROOT_PATH, './src'),
+      '@components': path.resolve(ROOT_PATH, './src/components'),
+      '@utils': path.resolve(ROOT_PATH, './src/utils'),
+    },
+    // 若没有写后缀时，依次从数组中查找相应后缀文件是否存在
+    extensions: ['.tsx', '.ts', '.js', '.json'],
   },
 };

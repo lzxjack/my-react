@@ -2,6 +2,7 @@ const path = require('path');
 const { merge } = require('webpack-merge');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
+const TerserPlugin = require('terser-webpack-plugin');
 
 const common = require('./webpack.common');
 const { ROOT_PATH } = require('../constant');
@@ -25,7 +26,15 @@ module.exports = merge(common, {
   // 专门存放优化打包的配置
   optimization: {
     minimize: true,
-    minimizer: [new CssMinimizerPlugin()],
+    minimizer: [
+      new CssMinimizerPlugin(),
+      new TerserPlugin({
+        extractComments: false, // 去除所有注释
+        terserOptions: {
+          compress: { pure_funcs: ['console.log'] }, // 去除所有console.log函数
+        },
+      }),
+    ],
   },
 });
 
