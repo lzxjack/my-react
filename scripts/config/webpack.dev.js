@@ -6,6 +6,7 @@ const common = require('./webpack.common');
 const { ROOT_PATH, SERVER_HOST, SERVER_PORT } = require('../constant');
 
 module.exports = merge(common, {
+  target: 'web',
   mode: 'development',
   devtool: 'eval-cheap-module-source-map',
   output: {
