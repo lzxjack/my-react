@@ -8,7 +8,7 @@
 // scripts/config/webpack.dev.js
 {
     output: {
-        path: path.resolve(PROJECT_PATH, './dist'),
+        path: path.resolve(PROJECT_PATH, './build'),
         publicPath: '/',
     },
     devServer: {

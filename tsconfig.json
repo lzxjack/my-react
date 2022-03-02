@@ -16,9 +16,7 @@
     "baseUrl": "./", // 根路径
     "paths": {
       // 路径映射，与 baseUrl 关联
-      "@/*": ["./src/*"],
-      "@components/*": ["./src/components/*"],
-      "@utils/*": ["./src/utils/*"]
+      "@/*": ["./src/*"]
     },
 
     // 实验性选项

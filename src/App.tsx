@@ -1,6 +1,6 @@
 import React from 'react';
 import s from './App.scss';
-import Test from '@components/Test';
+import Test from '@/components/Test';
 
 const App = () => {
   return (

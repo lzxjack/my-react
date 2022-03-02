@@ -143,9 +143,7 @@ module.exports = {
   // 路径配置别名
   resolve: {
     alias: {
-      '@src': path.resolve(ROOT_PATH, './src'),
-      '@components': path.resolve(ROOT_PATH, './src/components'),
-      '@utils': path.resolve(ROOT_PATH, './src/utils'),
+      '@': path.resolve(ROOT_PATH, './src'),
     },
     // 若没有写后缀时，依次从数组中查找相应后缀文件是否存在
     extensions: ['.tsx', '.ts', '.js', '.json'],
