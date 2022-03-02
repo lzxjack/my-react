@@ -3,7 +3,7 @@ const WebpackBar = require('webpackbar');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
-// const CopyPlugin = require('copy-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 const { ROOT_PATH } = require('../constant');
@@ -68,21 +68,21 @@ module.exports = {
         configFile: path.resolve(ROOT_PATH, './tsconfig.json'),
       },
     }),
-    // new CopyPlugin({
-    //   patterns: [
-    //     {
-    //       context: 'public',
-    //       from: '*',
-    //       to: path.resolve(ROOT_PATH, './build/public'),
-    //       toType: 'dir',
-    //       globOptions: {
-    //         dot: true,
-    //         gitignore: true,
-    //         ignore: ['**/index.html'], // **表示任意目录下
-    //       },
-    //     },
-    //   ],
-    // }),
+    new CopyWebpackPlugin({
+      patterns: [
+        {
+          context: 'public',
+          from: 'assets/*',
+          to: path.resolve(ROOT_PATH, './build'),
+          toType: 'dir',
+          globOptions: {
+            dot: true,
+            gitignore: true,
+            ignore: ['**/index.html'], // **表示任意目录下
+          },
+        },
+      ],
+    }),
     new CleanWebpackPlugin(),
   ],
 
