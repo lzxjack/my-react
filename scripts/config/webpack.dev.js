@@ -3,7 +3,7 @@ const { merge } = require('webpack-merge');
 const webpack = require('webpack');
 
 const common = require('./webpack.common');
-const { ROOT_PATH } = require('../constant');
+const { ROOT_PATH, SERVER_HOST, SERVER_PORT } = require('../constant');
 
 module.exports = merge(common, {
   target: 'web', // 解决热更新失效
@@ -16,6 +16,8 @@ module.exports = merge(common, {
     publicPath: '/',
   },
   devServer: {
+    host: SERVER_HOST,
+    port: SERVER_PORT,
     compress: true, // gzip压缩
     open: true, // 自动打开默认浏览器
     hot: true, // 启用服务热替换配置
