@@ -1,13 +1,24 @@
 import React from 'react';
-import s from './App.scss';
-import Test from '@/components/Test';
+import { Link, Routes, Route } from 'react-router-dom';
 import ErrorBoundary from '@/components/ErrorBoundary';
+import Admin from '@/pages/Admin';
+import Home from '@/pages/Home';
+import s from './App.scss';
 
-const App = () => {
+const App: React.FC = () => {
   return (
     <ErrorBoundary>
       <div className={s.AppBox}>
-        <Test text='My React' />
+        <nav>
+          <Link to='/admin'>admin</Link>
+          &nbsp;
+          <Link to='/home'>home</Link>
+        </nav>
+        <Routes>
+          <Route path='/' element={<Admin />} />
+          <Route path='admin' element={<Admin />} />
+          <Route path='home' element={<Home />} />
+        </Routes>
       </div>
     </ErrorBoundary>
   );

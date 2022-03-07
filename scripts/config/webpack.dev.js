@@ -12,8 +12,6 @@ module.exports = merge(common, {
   output: {
     path: path.resolve(ROOT_PATH, './build'),
     filename: 'js/[name].js',
-    // 404
-    publicPath: '/',
   },
   devServer: {
     host: SERVER_HOST,
@@ -23,12 +21,10 @@ module.exports = merge(common, {
     hot: true, // 启用服务热替换配置
     client: {
       logging: 'warn', // warn以上的信息，才会打印
-      overlay: true,
+      overlay: true, // 当出现编译错误或警告时，在浏览器中显示全屏覆盖
     },
     // 404
-    historyApiFallback: {
-      index: path.join(ROOT_PATH, './public/index.html'),
-    },
+    historyApiFallback: true,
   },
   plugins: [
     // 引入热替换
