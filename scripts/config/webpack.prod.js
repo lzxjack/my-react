@@ -16,7 +16,7 @@ module.exports = merge(common, {
     path: path.resolve(ROOT_PATH, './build'),
     filename: 'js/[name].[contenthash:8].js',
     // 资源
-    assetModuleFilename: 'images/[name].[contenthash:8].[ext]',
+    assetModuleFilename: 'assets/[name].[contenthash:8].[ext]',
   },
   plugins: [
     // 生产模式使用了MiniCssExtractPlugin.loader，则需要使用MiniCssExtractPlugin
