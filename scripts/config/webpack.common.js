@@ -5,7 +5,6 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
-const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 const { ROOT_PATH } = require('../constant');
 const { isDevelopment, isProduction } = require('../env');
@@ -85,8 +84,6 @@ module.exports = {
       ],
     }),
     new CleanWebpackPlugin(),
-    // 查看打包体积大小，开发/生产环境，启用一个本地服务器
-    new BundleAnalyzerPlugin(),
   ],
 
   module: {
