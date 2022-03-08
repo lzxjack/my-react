@@ -90,7 +90,13 @@ module.exports = {
     rules: [
       {
         test: /\.css$/,
+        exclude: [/node_modules/],
         use: [...getCssLoaders()],
+      },
+      {
+        test: /\.css$/,
+        exclude: [/src/],
+        use: ['style-loader', 'css-loader'],
       },
       {
         test: /\.less$/,
