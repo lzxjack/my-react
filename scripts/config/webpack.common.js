@@ -79,11 +79,13 @@ module.exports = {
   },
 
   plugins: [
+    // html模板
     new HtmlWebpackPlugin({
       template: path.resolve(ROOT_PATH, './public/index.html'),
       filename: 'index.html',
       inject: 'body',
     }),
+    // 打包显示进度条
     new WebpackBar(),
     // webpack打包不会有类型检查，强制ts类型检查
     new ForkTsCheckerWebpackPlugin({
@@ -91,6 +93,7 @@ module.exports = {
         configFile: path.resolve(ROOT_PATH, './tsconfig.json'),
       },
     }),
+    // 复制不用动态导入的资源
     new CopyWebpackPlugin({
       patterns: [
         {
@@ -106,8 +109,10 @@ module.exports = {
         },
       ],
     }),
+    // 自动删除上一次打包的产物
     new CleanWebpackPlugin(),
-    new AntdDayjsWebpackPlugin(), // 将antd中的moment.js替换为day.js
+    // 将antd中的moment.js替换为day.js
+    new AntdDayjsWebpackPlugin(),
   ],
 
   module: {

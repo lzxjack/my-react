@@ -48,5 +48,3 @@ module.exports = merge(common, {
     },
   },
 });
-
-// hash/chunkHash/contenthash的区别？
