@@ -7,7 +7,11 @@ import { DatePicker } from 'antd';
 import s from './App.scss';
 
 const App: React.FC = () => {
-  return <DatePicker />;
+  return (
+    <div className={s.AppBox}>
+      <DatePicker />
+    </div>
+  );
 
   return (
     <ErrorBoundary>

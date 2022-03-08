@@ -84,3 +84,62 @@ module.exports = {
 };
 ```
 
+## antd 自定义样式
+
+`.babelrc`中，`style`改为`true`，加载`less`文件。
+
+```js
+    [
+      "import",
+      {
+        "libraryName": "antd",
+        "libraryDirectory": "es",
+        "style": true // `style: true` 会加载 less 文件
+      }
+    ]
+```
+
+加载`less`，之前的`css-module`就不会冲突了，将之前写的删除：
+
+```js
+      // 删除以下
+      {
+        test: /\.css$/,
+        exclude: [/src/], // 排除业务代码
+        use: ['style-loader', 'css-loader'], // 不开启module
+      },
+```
+
+新增一项，处理`less`。同理，注意排除业务代码，不开启`module`：
+
+```js
+      {
+        test: /\.less$/,
+        exclude: /src/,
+        use: getAntdLessLoaders(),
+      },
+      
+      //...
+
+const getAntdLessLoaders = () => [
+  isDevelopment ? 'style-loader' : MiniCssExtractPlugin.loader,
+  {
+    loader: 'css-loader',
+    options: {
+      sourceMap: isDevelopment,
+    },
+  },
+  {
+    loader: 'less-loader',
+    options: {
+      sourceMap: isDevelopment,
+      lessOptions: {
+        // antd 自定义主题
+        modifyVars: myAntd,
+        javascriptEnabled: true,
+      },
+    },
+  },
+];
+```
+
