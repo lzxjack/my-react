@@ -1,7 +1,8 @@
 import React from 'react';
+import { DatePicker } from 'antd';
 
 const Home: React.FC = () => {
-  return <>Home</>;
+  return <DatePicker />;
 };
 
 export default Home;
