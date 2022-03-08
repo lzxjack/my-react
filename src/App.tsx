@@ -3,9 +3,12 @@ import { Link, Routes, Route } from 'react-router-dom';
 import ErrorBoundary from '@/components/ErrorBoundary';
 import Admin from '@/pages/Admin';
 import Home from '@/pages/Home';
+import { DatePicker } from 'antd';
 import s from './App.scss';
 
 const App: React.FC = () => {
+  return <DatePicker />;
+
   return (
     <ErrorBoundary>
       <div className={s.AppBox}>

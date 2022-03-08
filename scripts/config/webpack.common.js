@@ -9,6 +9,7 @@ const AntdDayjsWebpackPlugin = require('antd-dayjs-webpack-plugin');
 
 const { ROOT_PATH } = require('../constant');
 const { isDevelopment, isProduction } = require('../env');
+const { myAntd } = require('../antd-theme');
 
 const getCssLoaders = () => {
   const cssLoaders = [
@@ -51,6 +52,27 @@ const getCssLoaders = () => {
   return cssLoaders;
 };
 
+const getAntdLessLoaders = () => [
+  isDevelopment ? 'style-loader' : MiniCssExtractPlugin.loader,
+  {
+    loader: 'css-loader',
+    options: {
+      sourceMap: isDevelopment,
+    },
+  },
+  {
+    loader: 'less-loader',
+    options: {
+      sourceMap: isDevelopment,
+      lessOptions: {
+        // antd 自定义主题
+        modifyVars: myAntd,
+        javascriptEnabled: true,
+      },
+    },
+  },
+];
+
 module.exports = {
   entry: {
     index: path.resolve(ROOT_PATH, './src/index'),
@@ -92,16 +114,12 @@ module.exports = {
     rules: [
       {
         test: /\.css$/,
-        exclude: [/node_modules/],
-        use: [...getCssLoaders()],
-      },
-      {
-        test: /\.css$/,
-        exclude: [/src/],
-        use: ['style-loader', 'css-loader'],
+        exclude: /node_modules/,
+        use: getCssLoaders(),
       },
       {
         test: /\.less$/,
+        exclude: /node_modules/,
         use: [
           ...getCssLoaders(),
           {
@@ -113,7 +131,13 @@ module.exports = {
         ],
       },
       {
+        test: /\.less$/,
+        exclude: /src/,
+        use: getAntdLessLoaders(),
+      },
+      {
         test: /\.scss$/,
+        exclude: /node_modules/,
         use: [
           ...getCssLoaders(),
           {
