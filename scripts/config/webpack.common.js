@@ -5,6 +5,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const AntdDayjsWebpackPlugin = require('antd-dayjs-webpack-plugin');
 
 const { ROOT_PATH } = require('../constant');
 const { isDevelopment, isProduction } = require('../env');
@@ -84,6 +85,7 @@ module.exports = {
       ],
     }),
     new CleanWebpackPlugin(),
+    new AntdDayjsWebpackPlugin(), // 将antd中的moment.js替换为day.js
   ],
 
   module: {
