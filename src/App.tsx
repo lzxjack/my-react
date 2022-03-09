@@ -12,41 +12,22 @@ const Home = lazy(() => import(/* webpackChunkName:'Home', webpackPrefetch:true 
 
 const App: React.FC = () => {
   return (
-    <ErrorBoundary>
-      <div className={s.AppBox}>
-        <nav>
-          <Link to='/admin'>admin</Link>
-          &nbsp;
-          <Link to='/home'>home</Link>
-        </nav>
-        <Routes>
-          <Route
-            path='/'
-            element={
-              <Suspense fallback={<>123123</>}>
-                <Admin />
-              </Suspense>
-            }
-          />
-          <Route
-            path='admin'
-            element={
-              <Suspense fallback={<>123123123</>}>
-                <Admin />
-              </Suspense>
-            }
-          />
-          <Route
-            path='home'
-            element={
-              <Suspense fallback={<>12312312</>}>
-                <Home />
-              </Suspense>
-            }
-          />
-        </Routes>
-      </div>
-    </ErrorBoundary>
+    <div className={s.AppBox}>
+      <nav>
+        <Link to='/admin'>admin</Link>
+        &nbsp;
+        <Link to='/home'>home</Link>
+      </nav>
+      <ErrorBoundary>
+        <Suspense fallback={<>123123</>}>
+          <Routes>
+            <Route path='/' element={<Admin />} />
+            <Route path='admin' element={<Admin />} />
+            <Route path='home' element={<Home />} />
+          </Routes>
+        </Suspense>
+      </ErrorBoundary>
+    </div>
   );
 };
 
