@@ -14,7 +14,9 @@ module.exports = merge(common, {
   devtool: false,
   output: {
     path: path.resolve(ROOT_PATH, './build'),
+    publicPath: './',
     filename: 'js/[name].[contenthash:8].js',
+    chunkFilename: 'js/[name].[contenthash:8].js',
     // 资源
     assetModuleFilename: 'assets/[name].[contenthash:8].[ext]',
   },
@@ -25,7 +27,7 @@ module.exports = merge(common, {
       chunkFilename: 'css/[name].[contenthash:8].chunk.css',
     }),
     // 查看打包体积大小，启用一个本地服务器
-    new BundleAnalyzerPlugin(),
+    // new BundleAnalyzerPlugin(),
   ],
 
   // 专门存放优化打包的配置
