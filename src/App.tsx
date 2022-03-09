@@ -1,18 +1,16 @@
-import React from 'react';
+import React, { lazy, Suspense } from 'react';
 import { Link, Routes, Route } from 'react-router-dom';
 import ErrorBoundary from '@/components/ErrorBoundary';
-import Admin from '@/pages/Admin';
-import Home from '@/pages/Home';
-import { DatePicker } from 'antd';
+// import Admin from '@/pages/Admin';
+// import Home from '@/pages/Home';
 import s from './App.scss';
 
-const App: React.FC = () => {
-  // return (
-  //   <div className={s.AppBox}>
-  //     <DatePicker />
-  //   </div>
-  // );
+const Admin = lazy(
+  () => import(/* webpackChunkName:'Admin', webpackPrefetch:true */ '@/pages/Admin')
+);
+const Home = lazy(() => import(/* webpackChunkName:'Home', webpackPrefetch:true */ '@/pages/Home'));
 
+const App: React.FC = () => {
   return (
     <ErrorBoundary>
       <div className={s.AppBox}>
@@ -22,9 +20,30 @@ const App: React.FC = () => {
           <Link to='/home'>home</Link>
         </nav>
         <Routes>
-          <Route path='/' element={<Admin />} />
-          <Route path='admin' element={<Admin />} />
-          <Route path='home' element={<Home />} />
+          <Route
+            path='/'
+            element={
+              <Suspense fallback={<>123123</>}>
+                <Admin />
+              </Suspense>
+            }
+          />
+          <Route
+            path='admin'
+            element={
+              <Suspense fallback={<>123123123</>}>
+                <Admin />
+              </Suspense>
+            }
+          />
+          <Route
+            path='home'
+            element={
+              <Suspense fallback={<>12312312</>}>
+                <Home />
+              </Suspense>
+            }
+          />
         </Routes>
       </div>
     </ErrorBoundary>
