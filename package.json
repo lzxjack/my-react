@@ -20,7 +20,7 @@
   ],
   "husky": {
     "hooks": {
-      "pre-commit": "eslint src/** --ignore-pattern *.scss",
+      "pre-commit": "eslint ./src/** --ignore-pattern *.scss --no-error-on-unmatched-pattern --quiet",
       "commit-msg": "commitlint --config .commitlintrc.js -e"
     }
   },
