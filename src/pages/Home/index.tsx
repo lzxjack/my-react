@@ -1,7 +1,8 @@
-import React from 'react';
-import { DatePicker, Button, Space } from 'antd';
 import { useTitle } from 'ahooks';
+import { Button, DatePicker, Space } from 'antd';
+import React from 'react';
 import { connect } from 'react-redux';
+
 import { setCount } from '@/redux/actions';
 import { storeState } from '@/redux/interface';
 
@@ -41,7 +42,7 @@ const Home: React.FC<Props> = ({ count, setCount }) => {
 
 export default connect(
   (state: storeState) => ({
-    count: state.count,
+    count: state.count
   }),
-  { setCount },
+  { setCount }
 )(Home);
