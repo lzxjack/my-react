@@ -6,9 +6,11 @@ import ErrorBoundary from '@/components/ErrorBoundary';
 import s from './App.scss';
 
 const Admin = lazy(
-  () => import(/* webpackChunkName:'Admin', webpackPrefetch:true */ '@/pages/Admin')
+  () => import(/* webpackChunkName:'Admin', webpackPrefetch:true */ '@/pages/Admin'),
 );
-const Home = lazy(() => import(/* webpackChunkName:'Home', webpackPrefetch:true */ '@/pages/Home'));
+const Home = lazy(
+  () => import(/* webpackChunkName:'Home', webpackPrefetch:true */ '@/pages/Home'),
+);
 
 const App: React.FC = () => {
   return (

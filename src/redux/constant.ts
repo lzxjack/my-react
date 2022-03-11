@@ -1,1 +1,1 @@
-export const SET_COUNT: string = 'setCount';
+export const SET_COUNT = 'setCount';

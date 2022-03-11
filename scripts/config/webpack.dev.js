@@ -26,10 +26,7 @@ module.exports = merge(common, {
     // 解决路由跳转404问题
     historyApiFallback: true,
   },
-  plugins: [
-    // 引入热替换
-    new webpack.HotModuleReplacementPlugin(),
-  ],
+  plugins: [],
 
   optimization: {
     minimize: false,

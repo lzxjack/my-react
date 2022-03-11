@@ -14,11 +14,11 @@ const Home: React.FC<Props> = ({ count, setCount }) => {
   useTitle('Home');
 
   const add = () => {
-    setCount && setCount(count! + 1);
+    setCount?.(count! + 1);
   };
 
   const sub = () => {
-    setCount && setCount(count! - 1);
+    setCount?.(count! - 1);
   };
 
   return (
@@ -43,5 +43,5 @@ export default connect(
   (state: storeState) => ({
     count: state.count,
   }),
-  { setCount }
+  { setCount },
 )(Home);
