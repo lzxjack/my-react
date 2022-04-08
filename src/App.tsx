@@ -1,5 +1,5 @@
 import React, { lazy, Suspense } from 'react';
-import { Link, Route,Routes } from 'react-router-dom';
+import { Link, Route, Routes } from 'react-router-dom';
 
 import ErrorBoundary from '@/components/ErrorBoundary';
 

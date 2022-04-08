@@ -1,6 +1,5 @@
 const path = require('path');
 const { merge } = require('webpack-merge');
-const webpack = require('webpack');
 
 const common = require('./webpack.common');
 const { ROOT_PATH, SERVER_HOST, SERVER_PORT } = require('../constant');
@@ -11,7 +10,7 @@ module.exports = merge(common, {
   devtool: 'eval-cheap-module-source-map',
   output: {
     path: path.resolve(ROOT_PATH, './build'),
-    filename: 'js/[name].js',
+    filename: 'js/[name].js'
   },
   devServer: {
     host: SERVER_HOST,
@@ -21,10 +20,10 @@ module.exports = merge(common, {
     hot: true, // 启用服务热替换配置
     client: {
       logging: 'warn', // warn以上的信息，才会打印
-      overlay: true, // 当出现编译错误或警告时，在浏览器中显示全屏覆盖
+      overlay: true // 当出现编译错误或警告时，在浏览器中显示全屏覆盖
     },
     // 解决路由跳转404问题
-    historyApiFallback: true,
+    historyApiFallback: true
   },
   plugins: [],
 
@@ -34,7 +33,7 @@ module.exports = merge(common, {
     // 代码分割
     splitChunks: {
       chunks: 'all',
-      minSize: 0,
-    },
-  },
+      minSize: 0
+    }
+  }
 });
