@@ -5,11 +5,9 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
-const AntdDayjsWebpackPlugin = require('antd-dayjs-webpack-plugin');
 
 const { ROOT_PATH } = require('../constant');
 const { isDevelopment, isProduction } = require('../env');
-const { myAntd } = require('../antd-theme');
 
 const getCssLoaders = () => {
   const cssLoaders = [
@@ -52,27 +50,6 @@ const getCssLoaders = () => {
   return cssLoaders;
 };
 
-const getAntdLessLoaders = () => [
-  isDevelopment ? 'style-loader' : MiniCssExtractPlugin.loader,
-  {
-    loader: 'css-loader',
-    options: {
-      sourceMap: isDevelopment
-    }
-  },
-  {
-    loader: 'less-loader',
-    options: {
-      sourceMap: isDevelopment,
-      lessOptions: {
-        // antd 自定义主题
-        modifyVars: myAntd,
-        javascriptEnabled: true
-      }
-    }
-  }
-];
-
 module.exports = {
   entry: {
     index: path.resolve(ROOT_PATH, './src/index')
@@ -110,9 +87,7 @@ module.exports = {
       ]
     }),
     // 自动删除上一次打包的产物
-    new CleanWebpackPlugin(),
-    // 将antd中的moment.js替换为day.js
-    new AntdDayjsWebpackPlugin()
+    new CleanWebpackPlugin()
   ],
 
   module: {
@@ -134,11 +109,6 @@ module.exports = {
             }
           }
         ]
-      },
-      {
-        test: /\.less$/,
-        exclude: /src/,
-        use: getAntdLessLoaders()
       },
       {
         test: /\.scss$/,
