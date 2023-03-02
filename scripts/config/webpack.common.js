@@ -50,6 +50,44 @@ const getCssLoaders = () => {
   return cssLoaders;
 };
 
+const getCustomLoaders = () => {
+  const cssLoaders = [
+    isDevelopment
+      ? 'style-loader'
+      : { loader: MiniCssExtractPlugin.loader, options: { publicPath: '../' } },
+    {
+      loader: 'css-loader',
+      options: {
+        sourceMap: isDevelopment
+      }
+    }
+  ];
+
+  // 加css前缀的loader配置
+  const postcssLoader = {
+    loader: 'postcss-loader',
+    options: {
+      postcssOptions: {
+        plugins: [
+          isProduction && [
+            'postcss-preset-env',
+            {
+              autoprefixer: {
+                grid: true
+              }
+            }
+          ]
+        ]
+      }
+    }
+  };
+
+  // 生产模式时，才需要加css前缀
+  isProduction && cssLoaders.push(postcssLoader);
+
+  return cssLoaders;
+};
+
 module.exports = {
   entry: {
     index: path.resolve(ROOT_PATH, './src/index')
@@ -112,9 +150,21 @@ module.exports = {
       },
       {
         test: /\.scss$/,
-        exclude: /node_modules/,
+        exclude: [/node_modules/, /\.custom.scss$/],
         use: [
           ...getCssLoaders(),
+          {
+            loader: 'sass-loader',
+            options: {
+              sourceMap: isDevelopment
+            }
+          }
+        ]
+      },
+      {
+        test: /\.custom.scss$/,
+        use: [
+          ...getCustomLoaders(),
           {
             loader: 'sass-loader',
             options: {

@@ -1,10 +1,10 @@
+import './global.custom.scss';
+
 import React, { lazy, Suspense } from 'react';
 import { Link, Route, Routes } from 'react-router-dom';
 
 import ErrorBoundary from '@/components/ErrorBoundary';
 
-// import Admin from '@/pages/Admin';
-// import Home from '@/pages/Home';
 import s from './App.scss';
 
 const Admin = lazy(
