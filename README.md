@@ -33,15 +33,11 @@ yarn build
 
 ## 🔖功能版本
 
-- `react`：17.0.2
-- `react-router-dom`：6.2.2
-- `typescript`：4.6.2
-- `redux`：4.1.2
-- `less`：4.1.2
-- `sass-loader`：12.6.0
-- `commitlint`：16.2.1
-- `eslint`：8.10.0
-- `dayjs`：1.10.8
-- `antd`：4.19.0
-- `ahooks`：3.1.13
+- `react`：18.2.0
+- `react-router-dom`：6.8.2
+- `typescript`：4.9.5
+- `redux`：4.2.1
+- `dayjs`：1.11.7
+- `antd`：5.2.3
+- `ahooks`：3.7.5
 - ...
