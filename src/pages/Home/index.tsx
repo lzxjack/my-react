@@ -1,26 +1,19 @@
 import { useTitle } from 'ahooks';
 import { Button, DatePicker, Space } from 'antd';
 import React from 'react';
-import { connect } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
-import { setCount } from '@/redux/actions';
-import { storeState } from '@/redux/interface';
+import { selectCount, selectIsLogin } from '@/redux/selectors';
+import { decremented, incremented } from '@/redux/slices/count';
+import { login, logut } from '@/redux/slices/isLogin';
 
-interface Props {
-  count?: number;
-  setCount?: Function;
-}
-
-const Home: React.FC<Props> = ({ count, setCount }) => {
+const Home: React.FC = () => {
   useTitle('Home');
 
-  const add = () => {
-    setCount?.(count! + 1);
-  };
+  const count = useSelector(selectCount);
+  const isLogin = useSelector(selectIsLogin);
 
-  const sub = () => {
-    setCount?.(count! - 1);
-  };
+  const dispatch = useDispatch();
 
   return (
     <div>
@@ -28,11 +21,22 @@ const Home: React.FC<Props> = ({ count, setCount }) => {
       <div>
         <h2>{count}</h2>
         <Space>
-          <Button type='primary' onClick={add}>
+          <Button type='primary' onClick={() => dispatch(incremented())}>
             ADD
           </Button>
-          <Button type='primary' onClick={sub}>
+          <Button type='primary' onClick={() => dispatch(decremented())}>
             SUB
+          </Button>
+        </Space>
+      </div>
+      <div>
+        <h2>{isLogin ? '已' : '未'}登录</h2>
+        <Space>
+          <Button type='primary' onClick={() => dispatch(login())}>
+            login
+          </Button>
+          <Button type='primary' onClick={() => dispatch(logut())}>
+            logout
           </Button>
         </Space>
       </div>
@@ -40,9 +44,4 @@ const Home: React.FC<Props> = ({ count, setCount }) => {
   );
 };
 
-export default connect(
-  (state: storeState) => ({
-    count: state.count
-  }),
-  { setCount }
-)(Home);
+export default Home;
