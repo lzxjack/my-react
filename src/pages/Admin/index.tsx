@@ -7,8 +7,15 @@ import {
 } from '@ant-design/icons';
 import { useTitle } from 'ahooks';
 import { Button } from 'antd';
-import React from 'react';
-import { Link, Outlet } from 'react-router-dom';
+import React, { lazy } from 'react';
+import { Link, Navigate, Route, Routes } from 'react-router-dom';
+
+const About = lazy(
+  () => import(/* webpackChunkName:'About', webpackPrefetch:true */ '@/pages/Admin/About')
+);
+const Msg = lazy(
+  () => import(/* webpackChunkName:'Msg', webpackPrefetch:true */ '@/pages/Admin/Msg')
+);
 
 const Admin: React.FC = () => {
   useTitle('Admin');
@@ -26,7 +33,11 @@ const Admin: React.FC = () => {
         &nbsp;
         <Link to='msg'>msg</Link>
       </div>
-      <Outlet />
+      <Routes>
+        <Route path='' element={<About />} />
+        <Route path='msg' element={<Msg />} />
+        <Route path='*' element={<Navigate to='' />} />
+      </Routes>
     </>
   );
 };
