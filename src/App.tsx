@@ -1,7 +1,7 @@
 import './global.custom.scss';
 
 import React, { lazy, Suspense } from 'react';
-import { Link, Route, Routes } from 'react-router-dom';
+import { Link, Navigate, Route, Routes } from 'react-router-dom';
 
 import ErrorBoundary from '@/components/ErrorBoundary';
 
@@ -23,11 +23,12 @@ const App: React.FC = () => {
         <Link to='/home'>home</Link>
       </nav>
       <ErrorBoundary>
-        <Suspense fallback={<>123123</>}>
+        <Suspense fallback={<>loading...</>}>
           <Routes>
-            <Route path='/' element={<Admin />} />
-            <Route path='admin' element={<Admin />} />
+            {/* <Route path='/' element={<Admin />} /> */}
+            <Route path='admin/*' element={<Admin />} />
             <Route path='home' element={<Home />} />
+            <Route path='*' element={<Navigate to='admin' />} />
           </Routes>
         </Suspense>
       </ErrorBoundary>
