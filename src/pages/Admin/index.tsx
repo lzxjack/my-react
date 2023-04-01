@@ -10,6 +10,8 @@ import { Button } from 'antd';
 import React, { lazy } from 'react';
 import { Link, Navigate, Route, Routes } from 'react-router-dom';
 
+import RequireAuth from '@/components/RequireAuth';
+
 const About = lazy(
   () => import(/* webpackChunkName:'About', webpackPrefetch:true */ '@/pages/Admin/About')
 );
@@ -34,8 +36,22 @@ const Admin: React.FC = () => {
         <Link to='msg'>msg</Link>
       </div>
       <Routes>
-        <Route path='' element={<About />} />
-        <Route path='msg' element={<Msg />} />
+        <Route
+          path=''
+          element={
+            <RequireAuth requireLogin={true} to='/'>
+              <About />
+            </RequireAuth>
+          }
+        />
+        <Route
+          path='msg'
+          element={
+            <RequireAuth requireLogin={true} to='/'>
+              <Msg />
+            </RequireAuth>
+          }
+        />
         <Route path='*' element={<Navigate to='' />} />
       </Routes>
     </>

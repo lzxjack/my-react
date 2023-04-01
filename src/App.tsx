@@ -3,6 +3,8 @@ import './global.custom.scss';
 import React, { lazy } from 'react';
 import { Link, Navigate, Route, Routes } from 'react-router-dom';
 
+import RequireAuth from '@/components/RequireAuth';
+
 import s from './App.scss';
 
 const Admin = lazy(
@@ -20,9 +22,24 @@ const App: React.FC = () => {
         &nbsp;
         <Link to='/admin'>admin</Link>
       </div>
+
       <Routes>
-        <Route path='/' element={<Home />} />
-        <Route path='admin/*' element={<Admin />} />
+        <Route
+          path='/'
+          element={
+            <RequireAuth requireLogin={false} to='admin'>
+              <Home />
+            </RequireAuth>
+          }
+        />
+        <Route
+          path='admin/*'
+          element={
+            <RequireAuth requireLogin={true} to='/'>
+              <Admin />
+            </RequireAuth>
+          }
+        />
         <Route path='*' element={<Navigate to='/' />} />
       </Routes>
     </div>
