@@ -1,12 +1,11 @@
+import { Button } from '@arco-design/web-react';
 import {
-  HomeOutlined,
-  LoadingOutlined,
-  SettingFilled,
-  SmileOutlined,
-  SyncOutlined
-} from '@ant-design/icons';
+  IconFile,
+  IconGoogle,
+  IconLanguage,
+  IconLoading
+} from '@arco-design/web-react/icon';
 import { useTitle } from 'ahooks';
-import { Button } from 'antd';
 import React, { Suspense } from 'react';
 import { Link, Route, Routes } from 'react-router-dom';
 
@@ -14,13 +13,16 @@ const Admin: React.FC = () => {
   useTitle('Admin');
   return (
     <>
-      <Button type='primary'>按钮</Button>
-      <HomeOutlined />
-      <SettingFilled />
-      <SmileOutlined />
-      <SyncOutlined spin />
-      <SmileOutlined rotate={180} />
-      <LoadingOutlined />
+      <Button type='primary'>Primary</Button>
+      <Button type='secondary'>Secondary</Button>
+      <Button type='dashed'>Dashed</Button>
+      <Button type='outline'>Outline</Button>
+      <Button type='text'>Text</Button>
+      <IconLoading />
+      <IconFile />
+      <IconLanguage />
+      <IconGoogle />
+
       <nav>
         <Link to='xixi'>xixi</Link>
         &nbsp;
